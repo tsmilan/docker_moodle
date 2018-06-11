@@ -19,11 +19,19 @@ RUN apt-get update -y \
     php-intl \
     php-xmlrpc \
     php-ldap \
-    locales
+    locales \
+    make \
+    git \
+    memcached \
+    php-memcache
 
 RUN locale-gen en_AU.UTF-8
 
 RUN cd /usr/local/lib/ && curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
+
+RUN curl -sL https://deb.nodesource.com/setup_9.x | bash - \
+    && apt-get install -y nodejs build-essential autoconf libtool nasm pkg-config \
+    && npm install -g gulp
 
 RUN mkdir /siteroot
 

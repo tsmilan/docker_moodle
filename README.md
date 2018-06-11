@@ -1,1 +1,1 @@
-# docker_moodle
+# docker_mahara
