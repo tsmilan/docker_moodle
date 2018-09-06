@@ -17,14 +17,14 @@ services:
     volumes: 
       - 'moodledb:/var/lib/mysql'
   moodle-test-db:
-    image: postgres
-    restart: always
+    image: mysql:5.5
     environment:
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: moodle
-      POSTGRES_USER: moodle_user
-    volumes: 
-      - 'moodletestdb:/var/lib/postgresql'
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: moodle
+      MYSQL_USER: moodle_user
+      MYSQL_PASSWORD: password
+    volumes:
+      - 'moodletestdb:/var/lib/mysql'
 volumes:
     moodledb:
     moodletestdb:
