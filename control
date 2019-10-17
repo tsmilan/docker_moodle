@@ -1,0 +1,31 @@
+#! /bin/bash
+
+## Change to directory of where this script is located
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+cd $DIR;
+
+## Site specific configuration - container id's for containers in this directory
+webcont="$(docker-compose ps -q moodle)"
+dbcont="$(docker-compose ps -q moodle-db)"
+dbtestcont="$(docker-compose ps -q moodle-test-db)"
+
+for ARG in $*
+    do
+        case $ARG in
+            web)
+            docker exec -ti $webcont bash
+            exit
+            ;;
+            db)
+            docker exec -ti $dbcont bash
+            exit
+            ;;
+            testdb)
+            docker exec -ti $dbtestcont bash
+            exit
+            ;;
+            *)
+            continue
+        esac
+    done
+
